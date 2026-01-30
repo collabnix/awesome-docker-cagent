@@ -1,7 +1,6 @@
 
-![stars](https://img.shields.io/github/stars/collabnix/awesome-docker-cagent)
+![stars](https://img.shields.io/github/stars/docker/cagent)
 ![Discord](https://img.shields.io/discord/1020180904129335379)
-![GitHub contributors](https://img.shields.io/github/contributors/collabnix/awesome-docker-cagent)
 ![Twitter](https://img.shields.io/twitter/follow/collabnix?style=social)
 
 
@@ -26,8 +25,19 @@ This is a curated list of Docker cagent related resources. It is not an official
 
 - Join 10K+ DevOps Engineers today via [Community Slack](https://launchpass.com/collabnix)
 - Join our [Discord Server](https://discord.gg/QEkCXAXYSe)
-- Fork, Contribute & Share via [Scout GITHUB Repository](https://github.com/collabnix/awesome-docker-cagent)
+- Fork, Contribute & Share via [cagent GITHUB Repository](https://github.com/collabnix/awesome-docker-cagent)
 -  Click and Follow us over Twitter [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40collabnix)](https://twitter.com/collabnix)
 
 
-# Blogs
+## Blogs
+
+
+## Tutorials
+
+
+## Git Sample Projects
+
+## Case Studies
+
+
+# Featured Videos
