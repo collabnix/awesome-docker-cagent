@@ -1,5 +1,4 @@
 
-
 ![stars](https://img.shields.io/github/stars/collabnix/awesome-docker-cagent)
 ![Discord](https://img.shields.io/discord/1020180904129335379)
 ![GitHub contributors](https://img.shields.io/github/contributors/collabnix/awesome-docker-cagent)
@@ -9,6 +8,8 @@
 # Awesome Docker cagent [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 This is a curated list of Docker cagent related resources. It is not an official list, but a community effort to help people find the best stuff for Docker Scout in 2024 and beyond. 
+
+
 
 # Table of Contents
 
