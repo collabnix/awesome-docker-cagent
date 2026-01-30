@@ -4,18 +4,21 @@
 
 # Awesome Docker cagent [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects. This is a community effort to help people discover the best resources for Docker cagent in 2025 and beyond.
+A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects, organized by integration category. This is a community effort to help people discover the best resources for Docker cagent in 2025 and beyond.
 
 ## Table of Contents
 
 1. [Join our Community](#-join-our-community)
 2. [Official Resources](#-official-resources)
-3. [Blogs](#-blogs)
-4. [Tutorials](#-tutorials)
-5. [GitHub Sample Projects](#-github-sample-projects)
-6. [Case Studies](#-case-studies)
-7. [Featured Videos](#-featured-videos)
-8. [Related Tools](#-related-tools)
+3. [cagent + MCP](#-cagent--mcp)
+4. [cagent + Docker Model Runner](#-cagent--docker-model-runner)
+5. [cagent + IDE (ACP)](#-cagent--ide-acp)
+6. [cagent + RAG](#-cagent--rag)
+7. [General Resources](#-general-resources)
+8. [GitHub Sample Projects](#-github-sample-projects)
+9. [Featured Videos](#-featured-videos)
+
+---
 
 ## 📝 Join our Community
 
@@ -23,6 +26,8 @@ A curated list of Docker cagent resources - blogs, tutorials, videos, and sample
 - Join our [Discord Server](https://discord.gg/QEkCXAXYSe)
 - Fork, Contribute & Share via [cagent GitHub Repository](https://github.com/collabnix/awesome-docker-cagent)
 - Follow us on Twitter [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40collabnix)](https://twitter.com/collabnix)
+
+---
 
 ## 📚 Official Resources
 
@@ -33,41 +38,298 @@ A curated list of Docker cagent resources - blogs, tutorials, videos, and sample
 | [Docker MCP Catalog](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) | Containerized MCP servers for cagent |
 | [cagent Configuration Reference](https://docs.docker.com/ai/cagent/reference/configuration/) | YAML configuration options |
 | [cagent Tools Reference](https://docs.docker.com/ai/cagent/reference/tools/) | Built-in and MCP tool integration |
+| [Building a Coding Agent Tutorial](https://docs.docker.com/ai/cagent/tutorial/) | Official step-by-step tutorial |
 
-## 📖 Blogs
+---
 
-### Docker Official Blog
+## 🔌 cagent + MCP
 
-| Title | Date | Author |
-|-------|------|--------|
-| [How to Build a Multi-Agent AI System Fast with cagent](https://www.docker.com/blog/how-to-build-a-multi-agent-system/) | Oct 2025 | Docker |
-| [Build and Distribute AI Agents and Workflows with cagent](https://www.docker.com/blog/cagent-build-and-distribute-ai-agents-and-workflows/) | Sep 2025 | Oleg Šelajev |
-| [Cagent Comes to Docker Desktop with Built-In IDE Support through ACP](https://www.docker.com/blog/cagent-comes-to-docker-desktop-with-built-in-ide-support-through-acp/) | Nov 2025 | Docker |
-| [Break Free From AI Lock-In: GitHub Models + cagent](https://www.docker.com/blog/configure-cagent-github-models/) | Jan 2026 | Docker |
-| [Deterministic AI Testing with Session Recording in cagent](https://www.docker.com/blog/deterministic-ai-testing-with-session-recording-in-cagent/) | Jan 2026 | Docker |
-| [Using MCP Servers with Docker: Tools to Multi-Agent](https://www.docker.com/blog/mcp-servers-docker-toolkit-cagent-gateway/) | Jan 2026 | Mike Coleman |
+*Model Context Protocol (MCP) integration enables agents to use external tools and services via containerized MCP servers.*
+
+### Blogs & Articles
+
+| Title | Source | Description |
+|-------|--------|-------------|
+| [Using MCP Servers with Docker: Tools to Multi-Agent](https://www.docker.com/blog/mcp-servers-docker-toolkit-cagent-gateway/) | Docker Blog | Comprehensive guide on MCP Toolkit, Catalog, Gateway with cagent |
+| [Docker cagent Integration with MCP](https://collabnix.com/docs/docker-cagent/docker-cagent-integration-with-mcp/) | Collabnix | Detailed MCP integration patterns and examples |
+| [Build and Distribute AI Agents with cagent](https://www.docker.com/blog/cagent-build-and-distribute-ai-agents-and-workflows/) | Docker Blog | Using MCP for GitHub issues, Advocu integration |
+| [Orchestrate AI agents with cagent for BC/AL](https://tobiasfenster.io/orchestrate-multiple-ai-agents-with-cagent-by-docker) | tobiasfenster.io | Custom AL MCP Server integration |
+
+### Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [MCP Toolsets Reference](https://docs.docker.com/ai/cagent/reference/tools/#mcp-toolsets) | Official MCP configuration docs |
+| [Docker MCP Gateway](https://github.com/docker/mcp-gateway) | Centralized frontend for MCP servers |
+
+### Example Configurations
+
+```yaml
+# Basic MCP Integration with DuckDuckGo
+agents:
+  root:
+    model: openai/gpt-5-mini
+    description: A helpful AI assistant
+    instruction: |
+      You are a knowledgeable assistant with web search.
+    toolsets:
+      - type: mcp
+        ref: docker:duckduckgo
+```
+
+### Projects
+
+| Project | Description |
+|---------|-------------|
+| [mcp-advocu](https://github.com/shelajev/mcp-advocu) | Custom MCP server for Docker Captains tracking |
+| [GitHub Todo Agent](https://hub.docker.com/r/olegselajev241/github-todo) | Task tracking agent using GitHub MCP |
+
+---
+
+## 🖥️ cagent + Docker Model Runner
+
+*Run AI models locally without API keys using Docker Model Runner (DMR) for privacy-first, cost-effective inference.*
+
+### Blogs & Articles
+
+| Title | Source | Description |
+|-------|--------|-------------|
+| [Docker Model Runner: Now Generally Available](https://www.docker.com/blog/announcing-docker-model-runner-ga/) | Docker Blog | DMR GA announcement with cagent integration |
+| [Run LLMs Locally with Docker Model Runner](https://www.docker.com/blog/run-llms-locally/) | Docker Blog | Quickstart guide for local LLM inference |
+| [From Zero to Local LLM: A Developer's Guide](https://dev.to/docker/from-zero-to-local-llm-a-developers-guide-to-docker-model-runner-4oi2) | Dev.to | Comprehensive DMR tutorial |
+| [Docker Model Runner makes local LLMs easy](https://www.xda-developers.com/docker-model-runner-running-local-llms-easy/) | XDA Developers | Beginner-friendly DMR guide |
+| [How to change context size for DMR](https://jgcarmona.com/change-dmr-context-size/) | jgcarmona.com | Advanced DMR configuration with cagent |
+
+### Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [Local Models with cagent](https://docs.docker.com/ai/cagent/local-models/) | Official DMR + cagent integration docs |
+| [Docker Model Runner Docs](https://docs.docker.com/ai/model-runner/) | Complete DMR documentation |
+| [DigitalOcean cagent + DMR](https://docs.digitalocean.com/products/marketplace/catalog/cagent/) | Deploy cagent with DMR on DigitalOcean |
+
+### Example Configurations
+
+```yaml
+# Local Model with Docker Model Runner
+agents:
+  root:
+    model: dmr/ai/qwen3
+    instruction: You are a helpful assistant
+    toolsets:
+      - type: filesystem
+
+# With custom model configuration
+models:
+  local-qwen:
+    provider: dmr
+    model: ai/qwen3:14B
+    temperature: 0.7
+    max_tokens: 8192
+
+agents:
+  root:
+    model: local-qwen
+    instruction: You are a helpful coding assistant
+```
+
+### Key Features
+
+- **No API keys required** - Run models completely locally
+- **OpenAI-compatible API** - Easy integration with existing tools
+- **Automatic model pulling** - cagent prompts to download models on first use
+- **Privacy-first** - Your data never leaves your machine
+- **Multiple engines** - llama.cpp, vLLM, Diffusers support
+
+---
+
+## 💻 cagent + IDE (ACP)
+
+*Agent Client Protocol (ACP) enables cagent agents to run directly in your IDE with file operations through the editor.*
+
+### Blogs & Articles
+
+| Title | Source | Description |
+|-------|--------|-------------|
+| [Cagent Comes to Docker Desktop with IDE Support through ACP](https://www.docker.com/blog/cagent-comes-to-docker-desktop-with-built-in-ide-support-through-acp/) | Docker Blog | ACP launch announcement for cagent |
+| [Docker, JetBrains, and Zed: Building a Common Language](https://www.docker.com/blog/docker-jetbrains-and-zed-building-a-common-language-for-agents-and-ides/) | Docker Blog | ACP ecosystem expansion |
+| [Zed ACP Progress Report](https://zed.dev/blog/acp-progress-report) | Zed Blog | Community-driven ACP adoption |
+| [Intro to ACP: The Standard for AI Agent-Editor Integration](https://block.github.io/goose/blog/2025/10/24/intro-to-agent-client-protocol-acp/) | Goose Blog | ACP overview and setup |
+| [Zed debuts ACP to connect AI coding agents](https://tessl.io/blog/zed-debuts-agent-client-protocol-to-connect-ai-coding-agents-to-any-editor/) | Tessl.io | ACP ecosystem analysis |
+
+### Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [cagent ACP Integration](https://docs.docker.com/ai/cagent/integrations/acp/) | Official ACP setup for Zed, Neovim |
+| [Zed ACP Documentation](https://zed.dev/docs/ai/external-agents) | External agents in Zed |
+| [Agent Client Protocol](https://zed.dev/acp) | ACP specification and supported agents |
+
+### Supported IDEs
+
+| IDE | Status | Configuration |
+|-----|--------|---------------|
+| **Zed** | ✅ Native support | Built-in agent servers |
+| **Neovim** | ✅ Via CodeCompanion | Plugin configuration |
+| **JetBrains** | 🔜 Coming soon | Full IDE ecosystem |
+| **VS Code** | 🔜 Community adapters | In development |
+
+### Example Configuration (Zed)
+
+```json
+// ~/.config/zed/settings.json
+{
+  "agent_servers": {
+    "my-cagent-agent": {
+      "command": "cagent",
+      "args": ["acp", "./agent.yaml"]
+    }
+  }
+}
+```
+
+### Example Configuration (Neovim with CodeCompanion)
+
+```lua
+require("codecompanion").setup({
+  adapters = {
+    acp = {
+      cagent = function()
+        return require("codecompanion.adapters").extend("cagent", {
+          commands = {
+            default = { "cagent", "acp", "agent.yml" },
+          },
+        })
+      end,
+    },
+  },
+})
+```
+
+### Key Benefits
+
+- **Synchronized view** - Agent sees what you see in your editor
+- **Direct file operations** - Edit code right in your editor
+- **No context switching** - Stay in your IDE workflow
+- **Protocol standard** - Same agents work across editors
+
+---
+
+## 🔍 cagent + RAG
+
+*Retrieval-Augmented Generation (RAG) enables agents to access your documents with multiple retrieval strategies.*
+
+### Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [cagent RAG Configuration](https://github.com/docker/cagent#rag-retrieval-augmented-generation) | Official RAG setup in USAGE.md |
+| [Local Models with RAG](https://docs.docker.com/ai/cagent/local-models/) | Using DMR for embeddings and reranking |
+
+### Supported Strategies
+
+| Strategy | Description | Use Case |
+|----------|-------------|----------|
+| **BM25** | Keyword-based retrieval | Fast, no embeddings needed |
+| **chunked-embeddings** | Semantic search with chunking | Best for large documents |
+| **semantic-embeddings** | Full document embeddings | Small knowledge bases |
+| **Hybrid** | Combine multiple strategies | Production use |
+
+### Example Configurations
+
+```yaml
+# Basic RAG with OpenAI embeddings
+models:
+  embedder:
+    provider: openai
+    model: text-embedding-3-small
+
+rag:
+  my_knowledge_base:
+    docs: [./documents, ./pdfs]
+    strategies:
+      - type: chunked-embeddings
+        model: embedder
+        threshold: 0.5
+        chunking:
+          size: 1000
+          overlap: 100
+    results:
+      limit: 5
+
+agents:
+  root:
+    model: openai/gpt-4o
+    instruction: |
+      You are an assistant with access to an internal knowledge base.
+```
+
+```yaml
+# RAG with Local DMR Embeddings (No API keys!)
+rag:
+  codebase:
+    docs: [./src]
+    strategies:
+      - type: chunked-embeddings
+        embedding_model: dmr/ai/embeddinggemma
+    database: ./code.db
+```
+
+```yaml
+# Advanced RAG with Reranking
+rag:
+  knowledge_base:
+    docs: [./documents]
+    strategies:
+      - type: chunked-embeddings
+        model: openai/text-embedding-3-small
+        limit: 20  # Retrieve more candidates
+    results:
+      reranking:
+        model: openai/gpt-4.1-mini
+        threshold: 0.3
+        criteria: |
+          Prioritize recent documentation and practical examples.
+      limit: 5  # Final results after reranking
+```
+
+### Key Features
+
+- **Pluggable strategies** - BM25, chunked-embeddings, semantic-embeddings
+- **Hybrid retrieval** - Combine multiple strategies with result fusion
+- **Reranking support** - DMR native /rerank or LLM-based
+- **Local embeddings** - Use DMR for privacy-first RAG
+
+---
+
+## 📖 General Resources
+
+### Getting Started
+
+| Title | Source | Description |
+|-------|--------|-------------|
+| [What is Docker cagent and what problem does it solve?](https://collabnix.com/what-is-docker-cagent-and-what-problem-does-it-solve/) | Collabnix | Comprehensive introduction |
+| [Introduction to Docker Cagent](https://collabnix.com/docs/docker-cagent/introduction-to-docker-cagent/) | Collabnix | Architecture overview |
+| [Getting Started with Cagent](https://collabnix.com/docs/docker-cagent/getting-started-with-cagent/) | Collabnix | Installation and first agent |
+| [How to Build a Multi-Agent AI System Fast](https://www.docker.com/blog/how-to-build-a-multi-agent-system/) | Docker Blog | Multi-agent fundamentals |
+
+### Advanced Topics
+
+| Title | Source | Description |
+|-------|--------|-------------|
+| [Break Free From AI Lock-In: GitHub Models + cagent](https://www.docker.com/blog/configure-cagent-github-models/) | Docker Blog | Vendor independence with GitHub Models |
+| [Deterministic AI Testing with Session Recording](https://www.docker.com/blog/deterministic-ai-testing-with-session-recording-in-cagent/) | Docker Blog | VCR-style testing for agents |
+| [Building AI Agents Using cagent and GitHub Models](https://dzone.com/articles/building-ai-agents-using-docker-cagent-and-github) | DZone | Podcast generator tutorial |
+| [Building AI Agents Using Open-Source Docker cagent](https://cloudnativenow.com/contributed-content/building-ai-agents-using-open-source-docker-cagent-and-github-models/) | Cloud Native Now | Production deployment |
 
 ### Community Blogs
 
 | Title | Source | Author |
 |-------|--------|--------|
-| [What is Docker cagent and what problem does it solve?](https://collabnix.com/what-is-docker-cagent-and-what-problem-does-it-solve/) | Collabnix | Ajeet Raina |
-| [Introduction to Docker Cagent](https://collabnix.com/docs/docker-cagent/introduction-to-docker-cagent/) | Collabnix | Collabnix Team |
-| [Getting Started with Cagent](https://collabnix.com/docs/docker-cagent/getting-started-with-cagent/) | Collabnix | Collabnix Team |
-| [Docker cagent Integration with MCP](https://collabnix.com/docs/docker-cagent/docker-cagent-integration-with-mcp/) | Collabnix | Collabnix Team |
 | [Why You Should Care About Docker's cagent](https://medium.com/@reddyfull/why-you-should-care-about-dockers-cagent-and-how-to-build-a-multi-agent-ai-toolchain-with-it-cd0f0a2e92d9) | Medium | Srinivasa Tadipatri |
-| [Building AI Agents Using Docker cagent and GitHub Models](https://dzone.com/articles/building-ai-agents-using-docker-cagent-and-github) | DZone | Naga Santhosh Reddy |
-| [Building AI Agents Using Open-Source Docker cagent and GitHub Models](https://cloudnativenow.com/contributed-content/building-ai-agents-using-open-source-docker-cagent-and-github-models/) | Cloud Native Now | Naga Santhosh Reddy |
-| [Orchestrate multiple AI agents with cagent by Docker](https://tobiasfenster.io/orchestrate-multiple-ai-agents-with-cagent-by-docker) | tobiasfenster.io | Tobias Fenster |
+| [Orchestrate AI agents with cagent for BC/AL](https://tobiasfenster.io/orchestrate-multiple-ai-agents-with-cagent-by-docker) | tobiasfenster.io | Tobias Fenster |
 
-## 🎓 Tutorials
-
-| Title | Description | Link |
-|-------|-------------|------|
-| **Building a Coding Agent** | Official step-by-step tutorial to build a production-ready coding assistant | [Docker Docs](https://docs.docker.com/ai/cagent/tutorial/) |
-| **DigitalOcean cagent Droplet** | Deploy cagent on DigitalOcean with 1-click | [DigitalOcean Marketplace](https://docs.digitalocean.com/products/marketplace/catalog/cagent/) |
-| **BC/AL Coding Assistant** | Build a Microsoft Dynamics 365 Business Central coding assistant with multi-agent orchestration | [tobiasfenster.io](https://tobiasfenster.io/orchestrate-multiple-ai-agents-with-cagent-by-docker) |
-| **Podcast Generator with GitHub Models** | Build a multi-agent podcast generation system | [Docker Blog](https://www.docker.com/blog/configure-cagent-github-models/) |
+---
 
 ## 💻 GitHub Sample Projects
 
@@ -77,40 +339,29 @@ A curated list of Docker cagent resources - blogs, tutorials, videos, and sample
 |---------|-------------|
 | [cagent Examples Directory](https://github.com/docker/cagent/tree/main/examples) | Official example agents from Docker |
 | [Podcast Generator (GitHub Models)](https://github.com/docker/cagent/blob/main/examples/podcastgenerator_githubmodel.yaml) | Multi-agent podcast generation |
-| [Golang Developer Agent](https://github.com/docker/cagent/blob/main/examples/golang_developer.yaml) | The agent Docker uses to develop cagent itself |
+| [Golang Developer Agent](https://github.com/docker/cagent/blob/main/examples/golang_developer.yaml) | The agent Docker uses to develop cagent |
+| [DMR Example](https://github.com/docker/cagent/blob/main/examples/dmr.yaml) | Local model with Docker Model Runner |
+| [Pirate Agent](https://github.com/docker/cagent/blob/main/examples/pirate.yaml) | Fun personality agent |
 
 ### Community Projects
 
 | Project | Description | Author |
 |---------|-------------|--------|
-| [mcp-advocu](https://github.com/shelajev/mcp-advocu) | MCP server for Docker Captains tracking via Advocu | Oleg Šelajev |
-| [GitHub Todo Agent](https://hub.docker.com/r/olegselajev241/github-todo) | Task tracking agent using GitHub Issues | Oleg Šelajev |
-| [Research Agent](https://hub.docker.com/r/ajeetraina777/researchagent) | Web research agent with DuckDuckGo integration | Ajeet Raina |
+| [mcp-advocu](https://github.com/shelajev/mcp-advocu) | MCP server for Docker Captains tracking | Oleg Šelajev |
+| [GitHub Todo Agent](https://hub.docker.com/r/olegselajev241/github-todo) | Task tracking with GitHub Issues | Oleg Šelajev |
+| [Research Agent](https://hub.docker.com/r/ajeetraina777/researchagent) | Web research with DuckDuckGo | Ajeet Raina |
 
-## 🏢 Case Studies
-
-| Use Case | Description |
-|----------|-------------|
-| **Docker Captains Assistant** | AI assistant to query Docker Captains info and contributions via Advocu |
-| **Code Review Pipeline** | Multi-agent system: developer → reviewer → git handler |
-| **Research & Writing Teams** | Research agent → Content creator → Editor → SEO optimizer |
-| **DevOps Automation** | Monitoring agent → Issue detector → Fix implementer |
+---
 
 ## 🎬 Featured Videos
 
 *Coming soon - contributions welcome!*
 
-## 🔧 Related Tools
-
-| Tool | Description |
-|------|-------------|
-| [Docker MCP Gateway](https://github.com/docker/mcp-gateway) | Centralized frontend for MCP servers |
-| [Docker MCP Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) | GUI for managing MCP servers in Docker Desktop |
-| [Docker Model Runner](https://docs.docker.com/ai/model-runner/) | Run LLMs locally without API keys |
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### How to Contribute
 
@@ -119,6 +370,15 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 3. Commit your changes (`git commit -m 'Add amazing resource'`)
 4. Push to the branch (`git push origin feature/amazing-resource`)
 5. Open a Pull Request
+
+### Contribution Ideas
+
+- Add new blogs, tutorials, or videos
+- Share your cagent agent configurations
+- Create tutorials for specific use cases
+- Translate resources to other languages
+
+---
 
 ## 📜 License
 
