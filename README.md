@@ -396,7 +396,7 @@ rag:
 |-----------|-------------|-------|
 | [docker-mcp-tutorial](https://github.com/theNetworkChuck/docker-mcp-tutorial) | Complete tutorial for building MCP servers with Docker | 1310⭐ |
 | [code-sandbox-mcp](https://github.com/Automata-Labs-team/code-sandbox-mcp) | Secure code sandbox environment in Docker containers | 309⭐ |
-| [sandbox-mcp](https://github.com/pottekkat/sandbox-mcp) | Run ANY code safely in isolated Docker containers | 96⭐ |
+| [sandbox-mcp](https://github.com/pottekkat/sandbox-mcp) | Run any code safely in isolated Docker containers | 96⭐ |
 | [node-code-sandbox-mcp](https://github.com/alfonsograziano/node-code-sandbox-mcp) | Node.js-based MCP server for JavaScript execution | 141⭐ |
 
 ### Gateways & Orchestration
@@ -404,7 +404,7 @@ rag:
 | MCP Server | Description | Stars |
 |-----------|-------------|-------|
 | [mcp-gateway](https://github.com/microsoft/mcp-gateway) | Microsoft's MCP Gateway for Kubernetes environments | 440⭐ |
-| [mcp-context-forge](https://github.com/IBM/mcp-context-forge) | IBM's MCP Gateway & Registry with REST API conversion | 3201⭐ |
+| [mcp-context-forge](https://github.com/IBM/mcp-context-forge) | IBM's MCP Gateway and Registry with REST API conversion | 3201⭐ |
 | [Unla](https://github.com/AmoyLab/Unla) | Lightweight gateway transforming APIs into MCP servers | 2020⭐ |
 | [sandbox](https://github.com/agent-infra/sandbox) | All-in-One Sandbox: Browser, Shell, File, MCP and VSCode | 2307⭐ |
 
