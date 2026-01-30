@@ -4,7 +4,15 @@
 
 # Awesome Docker cagent [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects, organized by integration category. This is a community effort to help people discover the best resources for Docker cagent in 2025 and beyond.
+A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects, organized by integration category. This is a community effort to help people discover the best resources for Docker cagent in 2026 and beyond.
+
+## WTH is cagent?
+
+Docker cagent is an open-source, multi-agent runtime designed to simplify the development and deployment of autonomous AI systems. 
+
+Unlike traditional chatbots, this tool allows developers to orchestrate specialized teams of agents that can plan, reason, and execute complex tasks through a declarative YAML configuration. 
+
+The sources highlight its integration with the Model Context Protocol (MCP), which grants agents secure access to external tools, databases like Couchbase, and local filesystems. Users can run models from various providers, including OpenAI and Anthropic, or utilize the Docker Model Runner for local-first execution. The framework also supports agent distribution, allowing configurations to be shared and versioned as OCI artifacts via Docker Hub. Ultimately, cagent aims to provide a standardized, "container-like" experience for the burgeoning era of agentic AI.
 
 ## Table of Contents
 
