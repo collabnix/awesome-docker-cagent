@@ -12,7 +12,7 @@ Docker cagent is an open-source, multi-agent runtime designed to simplify the de
 
 Unlike traditional chatbots, this tool allows developers to orchestrate specialized teams of agents that can plan, reason, and execute complex tasks through a declarative YAML configuration. 
 
-The sources highlight its integration with the Model Context Protocol (MCP), which grants agents secure access to external tools, databases like Couchbase, and local filesystems. Users can run models from various providers, including OpenAI and Anthropic, or utilize the Docker Model Runner for local-first execution. The framework also supports agent distribution, allowing configurations to be shared and versioned as OCI artifacts via Docker Hub. Ultimately, cagent aims to provide a standardized, "container-like" experience for the burgeoning era of agentic AI.
+The curated list of links and resources in this page highlight its integration with the Model Context Protocol (MCP), which grants agents secure access to external tools, databases like Couchbase, and local filesystems. Users can run models from various providers, including OpenAI and Anthropic, or utilize the Docker Model Runner for local-first execution. The framework also supports agent distribution, allowing configurations to be shared and versioned as OCI artifacts via Docker Hub. Ultimately, cagent aims to provide a standardized, "container-like" experience for the burgeoning era of agentic AI.
 
 ## Table of Contents
 
