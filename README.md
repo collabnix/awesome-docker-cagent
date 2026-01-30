@@ -24,7 +24,8 @@ The curated list of links and resources in this page highlight its integration w
 6. [cagent + RAG](#-cagent--rag)
 7. [General Resources](#-general-resources)
 8. [GitHub Sample Projects](#-github-sample-projects)
-9. [Featured Videos](#-featured-videos)
+9. [MCP Servers for cagent](#-mcp-servers-for-cagent)
+10. [Featured Videos](#-featured-videos)
 
 ---
 
@@ -350,6 +351,7 @@ rag:
 | [Golang Developer Agent](https://github.com/docker/cagent/blob/main/examples/golang_developer.yaml) | The agent Docker uses to develop cagent |
 | [DMR Example](https://github.com/docker/cagent/blob/main/examples/dmr.yaml) | Local model with Docker Model Runner |
 | [Pirate Agent](https://github.com/docker/cagent/blob/main/examples/pirate.yaml) | Fun personality agent |
+| [cagent GitHub Action](https://github.com/docker/cagent-action) | Run cagent AI agents in GitHub workflows |
 
 ### Community Projects
 
@@ -358,6 +360,68 @@ rag:
 | [mcp-advocu](https://github.com/shelajev/mcp-advocu) | MCP server for Docker Captains tracking | Oleg Šelajev |
 | [GitHub Todo Agent](https://hub.docker.com/r/olegselajev241/github-todo) | Task tracking with GitHub Issues | Oleg Šelajev |
 | [Research Agent](https://hub.docker.com/r/ajeetraina777/researchagent) | Web research with DuckDuckGo | Ajeet Raina |
+| [Docktor](https://github.com/hwclass/docktor) | AI-native autoscaler for Docker Compose built with cagent + MCP + Model Runner | hwclass |
+| [Narwhal](https://github.com/jalonsogo/Narwhal) | Visual flow editor for creating and orchestrating multi-agent AI workflows | jalonsogo |
+| [cagent-blogposter](https://github.com/mfranzon/cagent-blogposter) | AI agents for ghostwriting using Docker cagent | mfranzon |
+| [cagent-compose](https://github.com/bjornhovd/cagent-compose) | Multi-agent AI system for meal planning, recipes, and wine pairing with MCP | bjornhovd |
+| [cagent-comedy-central](https://github.com/artofthepossible/cagent-comedy-central) | Launchpad for experimenting with multi-agent AI workflows | artofthepossible |
+| [nerdy-night-live](https://github.com/artofthepossible/nerdy-night-live) | Multi-agent AI playground where agents collaborate and delegate | artofthepossible |
+| [hackernews-sentiment-analysis](https://github.com/ajeetraina/hackernews-sentiment-analysis) | Sentiment analysis of Docker discussions from Hacker News using MCP | Ajeet Raina |
+| [bioCurator](https://github.com/sunitj/bioCurator) | Memory-augmented multi-agent system for scientific literature curation | sunitj |
+| [simple-alfresco-agent-mesh](https://github.com/aborroy/simple-alfresco-agent-mesh) | Alfresco MCP Server that routes prompts to specialized MCP servers | aborroy |
+| [cagent-demos](https://github.com/0GiS0/cagent-demos) | Demos and experiments with cagent | 0GiS0 |
+| [jueves-de-quack-cagent-demos](https://github.com/0GiS0/jueves-de-quack-cagent-demos) | Demos from Jueves de Quack event with cagent | 0GiS0 |
+| [cagent-ai-agent-docker](https://github.com/0GiS0/cagent-ai-agent-docker) | Minimal example of running cagent with GitHub Models | 0GiS0 |
+
+---
+
+## 🔧 MCP Servers for cagent
+
+*Useful MCP servers that extend cagent capabilities with external tools and services.*
+
+### Infrastructure & DevOps
+
+| MCP Server | Description | Stars |
+|-----------|-------------|-------|
+| [mcp-server-docker](https://github.com/ckreiling/mcp-server-docker) | MCP server for Docker container management | 670⭐ |
+| [docker-mcp](https://github.com/QuantGeekDev/docker-mcp) | Docker MCP Server for Model Context Protocol | 447⭐ |
+| [hub-mcp](https://github.com/docker/hub-mcp) | Official Docker Hub MCP Server | 115⭐ |
+| [k8s-mcp-server](https://github.com/alexei-led/k8s-mcp-server) | Kubernetes CLI tools (kubectl, helm, istioctl, argocd) | 180⭐ |
+| [aws-mcp-server](https://github.com/alexei-led/aws-mcp-server) | Execute AWS CLI commands in safe containerized environment | 172⭐ |
+| [podman-mcp-server](https://github.com/manusa/podman-mcp-server) | MCP server for Podman and Docker container runtimes | 54⭐ |
+
+### Development Tools
+
+| MCP Server | Description | Stars |
+|-----------|-------------|-------|
+| [docker-mcp-tutorial](https://github.com/theNetworkChuck/docker-mcp-tutorial) | Complete tutorial for building MCP servers with Docker | 1310⭐ |
+| [code-sandbox-mcp](https://github.com/Automata-Labs-team/code-sandbox-mcp) | Secure code sandbox environment in Docker containers | 309⭐ |
+| [sandbox-mcp](https://github.com/pottekkat/sandbox-mcp) | Run any code safely in isolated Docker containers | 96⭐ |
+| [node-code-sandbox-mcp](https://github.com/alfonsograziano/node-code-sandbox-mcp) | Node.js-based MCP server for JavaScript execution | 141⭐ |
+
+### Gateways & Orchestration
+
+| MCP Server | Description | Stars |
+|-----------|-------------|-------|
+| [mcp-gateway](https://github.com/microsoft/mcp-gateway) | Microsoft's MCP Gateway for Kubernetes environments | 440⭐ |
+| [mcp-context-forge](https://github.com/IBM/mcp-context-forge) | IBM's MCP Gateway and Registry with REST API conversion | 3201⭐ |
+| [Unla](https://github.com/AmoyLab/Unla) | Lightweight gateway transforming APIs into MCP servers | 2020⭐ |
+| [sandbox](https://github.com/agent-infra/sandbox) | All-in-One Sandbox: Browser, Shell, File, MCP and VSCode | 2307⭐ |
+
+### Security & Testing
+
+| MCP Server | Description | Stars |
+|-----------|-------------|-------|
+| [mcp-security-hub](https://github.com/FuzzingLabs/mcp-security-hub) | MCP servers for offensive security tools (Nmap, Ghidra, Nuclei) | 209⭐ |
+| [MCP-Kali-Server](https://github.com/TriV3/MCP-Kali-Server) | Automates Kali Linux pentesting with MCP | 25⭐ |
+
+### Utilities
+
+| MCP Server | Description | Stars |
+|-----------|-------------|-------|
+| [yutu](https://github.com/eat-pray-ai/yutu) | Fully functional MCP server and CLI for YouTube | 372⭐ |
+| [1Panel](https://github.com/1Panel-dev/1Panel) | Web interface and MCP Server to manage Linux servers | 33065⭐ |
+| [openapi-mcp](https://github.com/ckanthony/openapi-mcp) | Dockerized MCP Server for accessing any API with OpenAPI docs | 169⭐ |
 
 ---
 
