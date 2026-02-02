@@ -222,6 +222,12 @@ require("codecompanion").setup({
 - **No context switching** - Stay in your IDE workflow
 - **Protocol standard** - Same agents work across editors
 
+### IDE Plugins & Extensions
+
+| Plugin | IDE | Description | Repository |
+|--------|-----|-------------|------------|
+| **nvim-cagent** | Neovim | ACP adapter for CodeCompanion.nvim enabling integration with cagent | [slimslenderslacks/nvim-cagent](https://github.com/slimslenderslacks/nvim-cagent) |
+
 ---
 
 ## 🔍 cagent + RAG
@@ -372,6 +378,8 @@ rag:
 | [cagent-demos](https://github.com/0GiS0/cagent-demos) | Demos and experiments with cagent | 0GiS0 |
 | [jueves-de-quack-cagent-demos](https://github.com/0GiS0/jueves-de-quack-cagent-demos) | Demos from Jueves de Quack event with cagent | 0GiS0 |
 | [cagent-ai-agent-docker](https://github.com/0GiS0/cagent-ai-agent-docker) | Minimal example of running cagent with GitHub Models | 0GiS0 |
+| [cagent-product-catalog](https://github.com/ajeetraina/cagent-product-catalog) | Multi-agent catalog service implementation with specialized agents for vendor intake, market research, and customer matching | Ajeet Raina |
+| [docker-cagent-playground](https://github.com/tubone24/docker-cagent-playground) | Web-based chat UI for interacting with cagent agents | tubone24 |
 
 ---
 
