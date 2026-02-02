@@ -378,7 +378,7 @@ rag:
 | [cagent-demos](https://github.com/0GiS0/cagent-demos) | Demos and experiments with cagent | 0GiS0 |
 | [jueves-de-quack-cagent-demos](https://github.com/0GiS0/jueves-de-quack-cagent-demos) | Demos from Jueves de Quack event with cagent | 0GiS0 |
 | [cagent-ai-agent-docker](https://github.com/0GiS0/cagent-ai-agent-docker) | Minimal example of running cagent with GitHub Models | 0GiS0 |
-| [cagent-product-catalog](https://github.com/ajeetraina/cagent-product-catalog) | Catalog service cagent implementation with multi-agent architecture for catalog management | Ajeet Raina |
+| [cagent-product-catalog](https://github.com/ajeetraina/cagent-product-catalog) | Multi-agent catalog service implementation with specialized agents for vendor intake, market research, and customer matching | Ajeet Raina |
 | [docker-cagent-playground](https://github.com/tubone24/docker-cagent-playground) | Web-based chat UI for interacting with cagent agents | tubone24 |
 
 ---
