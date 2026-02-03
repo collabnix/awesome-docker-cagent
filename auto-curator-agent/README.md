@@ -31,7 +31,7 @@ A cagent multi-agent system that **maintains itself** — it discovers new Docke
 │    MCP    │    │   Tool    │  │   MCP    │
 └───────────┘    └───────────┘  └──────────┘
 
-Skills Layer (.claude/skills/):
+Skills Layer (.claude/skills/) — full version only:
 ┌────────────────────┬──────────────────┬────────────────────┐
 │ awesome-list-format│ link-validation  │ resource-discovery │
 │ Table syntax,      │ URL checking,    │ Search strategies, │
@@ -45,51 +45,55 @@ Skills Layer (.claude/skills/):
 - Docker Desktop 4.49+ (includes cagent)
 - GitHub Token with `repo` and `models:read` scope: `export GITHUB_TOKEN=your_token`
 
+## Quick Start
+
+```bash
+export GITHUB_TOKEN=your_github_pat
+
+# Use the LITE version (recommended for GitHub Models free tier)
+cagent run ./cagent-curator-lite.yaml "Find new cagent blog posts"
+```
+
+## Two Configs: Full vs Lite
+
+| | `cagent-curator.yaml` (Full) | `cagent-curator-lite.yaml` (Lite) |
+|---|---|---|
+| **Skills** | ✅ 3 skill files loaded | ❌ Disabled (saves ~2,500 tokens) |
+| **Instructions** | Detailed with examples | Condensed essentials |
+| **Sub-agent model** | gpt-4o (smart) | gpt-4o-mini (fast) |
+| **Token budget** | ~4,500+ tokens overhead | ~1,500 tokens overhead |
+| **Best for** | Paid GitHub Models / other providers | GitHub Models **free tier** |
+
+> **⚠️ GitHub Models free tier limits gpt-4o to 8,000 input tokens per request.**
+> Skills + detailed instructions + fetched content can easily exceed this.
+> Use the **lite** version unless you have paid GitHub Models or another provider.
+
 ## Usage
 
 ### 🔍 Discover New Resources
 
 ```bash
-# Find new blog posts from the last week
-cagent run ./cagent-curator.yaml "Find new Docker cagent blog posts published this week"
-
-# Search for new GitHub repos
-cagent run ./cagent-curator.yaml "Search GitHub for new cagent projects with at least 5 stars"
-
-# Find new MCP servers
-cagent run ./cagent-curator.yaml "Find new MCP servers that work with Docker containers"
-
-# Comprehensive discovery
-cagent run ./cagent-curator.yaml "Do a full discovery sweep: find new blogs, repos, MCP servers, and videos about Docker cagent"
+cagent run ./cagent-curator-lite.yaml "Find new Docker cagent blog posts published this week"
+cagent run ./cagent-curator-lite.yaml "Search GitHub for new cagent projects with at least 5 stars"
+cagent run ./cagent-curator-lite.yaml "Find new MCP servers that work with Docker containers"
+cagent run ./cagent-curator-lite.yaml "Do a full discovery sweep: find new blogs, repos, MCP servers, and videos about Docker cagent"
 ```
 
 ### ✅ Validate Existing Links
 
 ```bash
-# Check all links in the awesome list
-cagent run ./cagent-curator.yaml "Read the awesome-docker-cagent README and check all URLs for broken links"
-
-# Check a specific section
-cagent run ./cagent-curator.yaml "Validate all GitHub repo links in the Sample Projects section"
-
-# Update star counts
-cagent run ./cagent-curator.yaml "Check and update star counts for all MCP servers in the list"
+cagent run ./cagent-curator-lite.yaml "Read the awesome-docker-cagent README and check all URLs for broken links"
+cagent run ./cagent-curator-lite.yaml "Validate all GitHub repo links in the Sample Projects section"
 ```
 
 ### 📝 Submit Updates via PR
 
 ```bash
-# Find and submit new resources
-cagent run ./cagent-curator.yaml "Find new cagent resources, validate them, and create a PR adding them to the awesome list"
-
-# Fix broken links
-cagent run ./cagent-curator.yaml "Check for broken links and create a PR removing or updating them"
-
-# Weekly maintenance
-cagent run ./cagent-curator.yaml "Perform weekly maintenance: discover new resources, validate all links, update star counts, and submit a PR with all changes"
+cagent run ./cagent-curator-lite.yaml "Find new cagent resources, validate them, and create a PR adding them to the awesome list"
+cagent run ./cagent-curator-lite.yaml "Perform weekly maintenance: discover new resources, validate all links, and submit a PR with all changes"
 ```
 
-## Skills
+## Skills (Full Version Only)
 
 | Skill | Purpose |
 |-------|---------|
@@ -112,10 +116,12 @@ providers:
 models:
   smart:
     provider: github
-    model: openai/gpt-4o
+    model: openai/gpt-4o     # vendor prefix required!
+    max_tokens: 4096
   fast:
     provider: github
     model: openai/gpt-4o-mini
+    max_tokens: 2048
 ```
 
 > **Important:** GitHub Models requires the `openai/` vendor prefix in model names.
@@ -136,12 +142,32 @@ Your GitHub PAT needs these permissions:
 
 Create a fine-grained PAT at: https://github.com/settings/personal-access-tokens
 
+## GitHub Models Free Tier Limits
+
+| Limit | gpt-4o | gpt-4o-mini |
+|-------|--------|-------------|
+| Input tokens/request | 8,000 | 8,000 |
+| Output tokens/request | 4,096 | 4,096 |
+| Requests/minute | 10 | 15 |
+| Requests/day | 50 | 150 |
+
+These limits are why the **lite version** exists — skills + verbose instructions consume too many input tokens.
+
 ## How It Works
 
 1. **Discovery**: The `discoverer` agent searches DuckDuckGo and GitHub for new cagent content
 2. **Validation**: The `validator` agent checks each URL, verifies content relevance, and scores quality
-3. **Formatting**: The root agent applies the `awesome-list-format` skill to create properly formatted table entries
+3. **Formatting**: The root agent formats new entries into the correct markdown table syntax
 4. **Publishing**: The `publisher` agent reads the current README, creates a branch, adds new entries in the correct sections, and opens a PR
+
+## Troubleshooting
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `403 no_access to model: /gpt-4o` | Missing vendor prefix | Use `openai/gpt-4o` not `gpt-4o` |
+| `403 no_access to model: openai/gpt-4o` | Token missing models permission | Add `models:read` to your PAT |
+| `413 Request Entity Too Large` | Input exceeds 8K tokens | Switch to `cagent-curator-lite.yaml` |
+| `429 Too Many Requests` | Rate limit hit | Wait and retry (10 req/min for gpt-4o) |
 
 ## Automation Ideas
 
@@ -160,7 +186,7 @@ jobs:
     steps:
       - uses: docker/cagent-action@v1
         with:
-          config: cagent-curator.yaml
+          config: auto-curator-agent/cagent-curator-lite.yaml
           prompt: "Perform weekly maintenance: find new resources and create a PR"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -169,5 +195,5 @@ jobs:
 ### Push to Docker Hub
 ```bash
 docker login
-cagent push ./cagent-curator.yaml docker.io/ajeetraina/awesome-cagent-curator:latest
+cagent push ./cagent-curator-lite.yaml docker.io/ajeetraina/awesome-cagent-curator:latest
 ```
