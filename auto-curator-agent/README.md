@@ -73,25 +73,64 @@ cagent run ./cagent-curator-lite.yaml "Find new cagent blog posts"
 ### 🔍 Discover New Resources
 
 ```bash
+# Basic discovery
 cagent run ./cagent-curator-lite.yaml "Find new Docker cagent blog posts published this week"
+
+# Specific and targeted (recommended — see Prompting Tips below)
+cagent run ./cagent-curator-lite.yaml "Search for blog posts that specifically mention 'cagent' the Docker multi-agent runtime tool. Only include posts that discuss cagent YAML configs, cagent run commands, or multi-agent orchestration with cagent. Exclude generic Docker or Docker Model Runner posts."
+
+# Search GitHub repos
 cagent run ./cagent-curator-lite.yaml "Search GitHub for new cagent projects with at least 5 stars"
-cagent run ./cagent-curator-lite.yaml "Find new MCP servers that work with Docker containers"
-cagent run ./cagent-curator-lite.yaml "Do a full discovery sweep: find new blogs, repos, MCP servers, and videos about Docker cagent"
+
+# Full sweep with dedup check
+cagent run ./cagent-curator-lite.yaml "Read the current README from collabnix/awesome-docker-cagent, then search for new blog posts about Docker cagent that are NOT already in the list. Only include posts that specifically discuss cagent."
 ```
 
 ### ✅ Validate Existing Links
 
 ```bash
+# Check all links in the awesome list
 cagent run ./cagent-curator-lite.yaml "Read the awesome-docker-cagent README and check all URLs for broken links"
+
+# Check a specific section
 cagent run ./cagent-curator-lite.yaml "Validate all GitHub repo links in the Sample Projects section"
 ```
 
 ### 📝 Submit Updates via PR
 
 ```bash
+# Find and submit new resources
 cagent run ./cagent-curator-lite.yaml "Find new cagent resources, validate them, and create a PR adding them to the awesome list"
+
+# Weekly maintenance
 cagent run ./cagent-curator-lite.yaml "Perform weekly maintenance: discover new resources, validate all links, and submit a PR with all changes"
 ```
+
+## 💡 Prompting Tips
+
+The **lite config** trades detailed skill instructions for token headroom. This means your **prompt quality matters more** — be specific to get better results.
+
+### ❌ Too Vague (may return generic Docker content)
+```bash
+cagent run ./cagent-curator-lite.yaml "Find new cagent blog posts"
+```
+This can return posts about Docker Model Runner, Docker MCP, or other Docker AI features that aren't specifically about cagent.
+
+### ✅ Specific & Targeted (better results)
+```bash
+cagent run ./cagent-curator-lite.yaml "Search for blog posts that specifically mention 'cagent' the Docker multi-agent runtime tool. Only include posts that discuss cagent YAML configs, cagent run commands, or multi-agent orchestration with cagent. Exclude generic Docker or Docker Model Runner posts."
+```
+
+### ✅ With Deduplication
+```bash
+cagent run ./cagent-curator-lite.yaml "Read the current README from collabnix/awesome-docker-cagent first, then search for new blog posts about Docker cagent that are NOT already listed. Only include posts that specifically discuss cagent."
+```
+
+### Key Tips
+- **Say "cagent" explicitly** — helps the model distinguish from generic Docker content
+- **Mention what to exclude** — "Exclude generic Docker, Docker Model Runner, or Claude Code posts"
+- **Ask it to read the README first** — enables deduplication against existing entries
+- **One task per prompt** — "Find blogs" OR "Validate links", not both at once (saves tokens)
 
 ## Skills (Full Version Only)
 
@@ -168,6 +207,7 @@ These limits are why the **lite version** exists — skills + verbose instructio
 | `403 no_access to model: openai/gpt-4o` | Token missing models permission | Add `models:read` to your PAT |
 | `413 Request Entity Too Large` | Input exceeds 8K tokens | Switch to `cagent-curator-lite.yaml` |
 | `429 Too Many Requests` | Rate limit hit | Wait and retry (10 req/min for gpt-4o) |
+| Results include generic Docker posts | Prompt too vague | Be specific — see Prompting Tips above |
 
 ## Automation Ideas
 
@@ -187,7 +227,7 @@ jobs:
       - uses: docker/cagent-action@v1
         with:
           config: auto-curator-agent/cagent-curator-lite.yaml
-          prompt: "Perform weekly maintenance: find new resources and create a PR"
+          prompt: "Search for blog posts that specifically mention cagent the Docker multi-agent runtime. Read the current README first to avoid duplicates. Only include cagent-specific content. Create a PR with any new findings."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
