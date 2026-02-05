@@ -1,0 +1,97 @@
+name: Scan for New cagent Tools
+
+on:
+  # Run weekly on Sunday at 9:00 UTC
+  schedule:
+    - cron: '0 9 * * 0'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      days_back:
+        description: 'Number of days to look back for new tools'
+        required: false
+        default: '90'
+
+jobs:
+  scan-tools:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run GitHub scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scan_github_tools.py
+      
+      - name: Check if new tools were found
+        id: check_results
+        run: |
+          if [ -f new_tools_found.md ]; then
+            # Count markdown table rows with links (excluding headers and separators)
+            # Match lines like: | [name](url) | ... |
+            TOOL_COUNT=$(grep -c '^\| \[' new_tools_found.md || echo "0")
+            if [ "$TOOL_COUNT" -gt 0 ]; then
+              echo "found=true" >> $GITHUB_OUTPUT
+              echo "New tools found: $TOOL_COUNT entries"
+            else
+              echo "found=false" >> $GITHUB_OUTPUT
+              echo "No new tools found"
+            fi
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "No output file generated"
+          fi
+      
+      - name: Upload scan results
+        if: steps.check_results.outputs.found == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-tools-scan-${{ github.run_number }}
+          path: new_tools_found.md
+          retention-days: 90
+      
+      - name: Create issue with findings
+        if: steps.check_results.outputs.found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('new_tools_found.md', 'utf8');
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🤖 New cagent Tools Found - ${new Date().toISOString().split('T')[0]}`,
+              body: `The automated GitHub scanner has discovered new Docker cagent tools!\n\n${results}\n\n---\n\n**Next Steps:**\n1. Review each tool for quality and relevance\n2. Verify the tools actually use cagent\n3. Add appropriate entries to README.md\n4. Close this issue once processed\n\n*This issue was created automatically by the [scan-tools workflow](.github/workflows/scan-tools.yml)*`,
+              labels: ['automation', 'new-tools']
+            });
+            
+            console.log(`Created issue #${issue.data.number}`);
+      
+      - name: Comment on no results
+        if: steps.check_results.outputs.found == 'false'
+        run: |
+          echo "No new tools found in this scan. This is normal if the list is up-to-date!"
+          echo "The scanner checked for:"
+          echo "  - New repositories with 'cagent' keywords"
+          echo "  - Recently updated projects (last 90 days)"
+          echo "  - Projects with cagent.yaml configuration files"

@@ -6,6 +6,8 @@
 
 A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects, organized by integration category. This is a community effort to help people discover the best resources for Docker cagent in 2026 and beyond.
 
+> 🔍 **New!** Automatically discover new cagent tools with our [GitHub Scanner](SCANNER_USAGE.md) - a Python tool that searches GitHub for the latest cagent projects and formats them for easy addition to this list.
+
 ## What's cagent?
 
 Docker cagent is an open-source, multi-agent runtime designed to simplify the development and deployment of autonomous AI systems. 
@@ -457,6 +459,30 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Share your cagent agent configurations
 - Create tutorials for specific use cases
 - Translate resources to other languages
+
+### Automated Tool Discovery
+
+We provide a **GitHub scanner tool** to help discover new cagent resources automatically:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Set your GitHub token (for higher API rate limits)
+export GITHUB_TOKEN=your_github_personal_access_token
+
+# Run the scanner
+python3 scan_github_tools.py
+```
+
+The scanner will:
+- Search GitHub for new cagent tools and projects
+- Filter by quality (stars, recent activity, meaningful content)
+- Automatically categorize findings (MCP servers, sample projects, etc.)
+- Deduplicate against existing entries
+- Generate formatted markdown ready to add to this README
+
+See [SCANNER_USAGE.md](SCANNER_USAGE.md) for detailed documentation and [EXAMPLE_OUTPUT.md](EXAMPLE_OUTPUT.md) for sample output.
 
 ---
 
