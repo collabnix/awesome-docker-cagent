@@ -46,9 +46,10 @@ jobs:
         id: check_results
         run: |
           if [ -f new_tools_found.md ]; then
-            # Count non-empty content lines (excluding headers and separators)
-            TOOL_COUNT=$(grep -c "^\|" new_tools_found.md | tail -1 || echo "0")
-            if [ "$TOOL_COUNT" -gt 3 ]; then
+            # Count markdown table rows with links (excluding headers and separators)
+            # Match lines like: | [name](url) | ... |
+            TOOL_COUNT=$(grep -c '^\| \[' new_tools_found.md || echo "0")
+            if [ "$TOOL_COUNT" -gt 0 ]; then
               echo "found=true" >> $GITHUB_OUTPUT
               echo "New tools found: $TOOL_COUNT entries"
             else

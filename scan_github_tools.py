@@ -156,7 +156,9 @@ class CagentToolScanner:
         try:
             readme = repo.get_readme()
             return readme.decoded_content.decode('utf-8').lower()
-        except:
+        except GithubException:
+            return ""
+        except Exception:
             return ""
     
     def is_mcp_server(self, repo, readme: str) -> bool:
@@ -197,9 +199,17 @@ class CagentToolScanner:
             if indicator in name or indicator in description:
                 return True
         
-        # Check if it has cagent.yaml files
-        if 'cagent.yaml' in readme or 'cagent-' in readme:
-            return True
+        # Check if it has cagent configuration files
+        config_patterns = [
+            'cagent.yaml',
+            'cagent-config.yaml',
+            'agents:\n',  # YAML agent definition
+            'version: "3"',  # cagent v3
+        ]
+        
+        for pattern in config_patterns:
+            if pattern in readme:
+                return True
         
         return False
     
