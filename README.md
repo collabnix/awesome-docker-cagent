@@ -6,8 +6,6 @@
 
 A curated list of Docker cagent resources - blogs, tutorials, videos, and sample projects, organized by integration category. This is a community effort to help people discover the best resources for Docker cagent in 2026 and beyond.
 
-> 🔍 **New!** Automatically discover new cagent tools with our [GitHub Scanner](SCANNER_USAGE.md) - a Python tool that searches GitHub for the latest cagent projects and formats them for easy addition to this list.
-
 ## What's cagent?
 
 Docker cagent is an open-source, multi-agent runtime designed to simplify the development and deployment of autonomous AI systems. 
