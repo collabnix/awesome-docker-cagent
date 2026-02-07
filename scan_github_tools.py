@@ -260,23 +260,22 @@ class CagentToolScanner:
             print(f"Unexpected error: {type(e).__name__}")
     
     def search_blogs(self, query: str, days_back: int = 90):
-        """Search GitHub for blog posts and articles about cagent"""
+        """Search GitHub for blog posts and articles about cagent
+        
+        Args:
+            query: Search query string to find blog repositories
+            days_back: Number of days to look back for recent activity (default: 90)
+            
+        Side effects:
+            Updates self.results['blogs'] with found blog repositories
+        """
         print(f"\nSearching for blog posts: {query}")
         
         # Calculate date for recent activity filter
         since_date = datetime.now() - timedelta(days=days_back)
         date_str = since_date.strftime('%Y-%m-%d')
         
-        # Search for repositories that are likely blogs
-        blog_indicators = [
-            'blog',
-            'article',
-            'tutorial',
-            'guide',
-            'post'
-        ]
-        
-        # Add blog-specific terms to query
+        # Add date filter to query
         full_query = f"{query} pushed:>{date_str}"
         
         try:
@@ -297,8 +296,6 @@ class CagentToolScanner:
                 
                 # Check if this looks like a blog/article repository
                 if self.is_blog_repository(repo):
-                    readme = self.get_readme_content(repo)
-                    
                     self.results['blogs'].append({
                         'name': repo.name,
                         'url': repo.html_url,
@@ -323,7 +320,18 @@ class CagentToolScanner:
             print(f"Unexpected error: {type(e).__name__}")
     
     def is_blog_repository(self, repo) -> bool:
-        """Check if repository appears to be a blog or article"""
+        """Check if repository appears to be a blog or article
+        
+        Args:
+            repo: GitHub repository object with name, description, and get_topics() method
+            
+        Returns:
+            bool: True if repository appears to be a blog/article, False otherwise
+            
+        Checks repository name, description, and topics against known blog indicators:
+        - Names/descriptions: blog, article, tutorial, guide, post, writing, content
+        - Topics: blog, article, tutorial, documentation, guide
+        """
         blog_indicators = [
             'blog',
             'article',
