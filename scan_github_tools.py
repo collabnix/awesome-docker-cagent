@@ -31,6 +31,10 @@ except ImportError:
 class CagentToolScanner:
     """Scanner for finding new cagent tools on GitHub"""
     
+    # Configuration constants
+    MAX_REPOS_PER_QUERY = 30  # Maximum repositories to process per search query
+    MAX_BLOGS_PER_QUERY = 15  # Maximum blog repositories to collect per query
+    
     def __init__(self, github_token: str = None):
         """Initialize the scanner with GitHub API token"""
         self.token = github_token or os.environ.get('GITHUB_TOKEN')
@@ -286,7 +290,7 @@ class CagentToolScanner:
             )
             
             found_count = 0
-            for repo in repos[:30]:  # Limit to top 30 results
+            for repo in repos[:self.MAX_REPOS_PER_QUERY]:  # Limit results
                 if self.is_duplicate(repo.html_url):
                     continue
                 
@@ -307,7 +311,7 @@ class CagentToolScanner:
                     found_count += 1
                 
                 # Rate limiting
-                if found_count >= 15:
+                if found_count >= self.MAX_BLOGS_PER_QUERY:
                     break
             
             print(f"Found {found_count} blog/article repositories")

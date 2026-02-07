@@ -69,7 +69,10 @@ if [ -f "new_tools_found.md" ]; then
     # Check if blogs were found
     if grep -q "### Blogs & Articles" new_tools_found.md; then
         # Extract just the Blogs & Articles section using sed
-        # Handles both middle sections and last section correctly
+        # Pattern explanation: 
+        # - '/### Blogs & Articles/,/^### /' = From "### Blogs & Articles" to next "### " header
+        # - '{/^### Blogs & Articles/p; /^### /!p;}' = Print the start header and everything except the end header
+        # - 'sed '/^### $/d'' = Remove any standalone "### " lines
         blog_section=$(sed -n '/### Blogs & Articles/,/^### /{/^### Blogs & Articles/p; /^### /!p;}' new_tools_found.md | sed '/^### $/d')
         
         # Count blog entries (exclude header and separator rows)
