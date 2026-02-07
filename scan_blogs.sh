@@ -69,8 +69,8 @@ if [ -f "new_tools_found.md" ]; then
     # Check if blogs were found
     if grep -q "### Blogs & Articles" new_tools_found.md; then
         # Extract just the Blogs & Articles section using sed
-        # Stop at next section header or end of file
-        blog_section=$(sed -n '/### Blogs & Articles/,/^### /p' new_tools_found.md | head -n -1)
+        # Handles both middle sections and last section correctly
+        blog_section=$(sed -n '/### Blogs & Articles/,/^### /{/^### Blogs & Articles/p; /^### /!p;}' new_tools_found.md | sed '/^### $/d')
         
         # Count blog entries (exclude header and separator rows)
         blog_count=$(echo "$blog_section" | grep "^|" | tail -n +3 | wc -l)
