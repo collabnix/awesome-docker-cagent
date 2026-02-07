@@ -6,6 +6,14 @@ This is an example of what the scanner output looks like when it finds new cagen
 
 *Scan Date: 2026-02-05*
 
+### Blogs & Articles
+
+| Title | Description | Author | Updated |
+|-------|-------------|--------|---------|
+| [cagent-getting-started](https://github.com/example/cagent-intro) | Comprehensive introduction to Docker cagent for beginners | johndoe | 2026-02-03 |
+| [mastering-cagent-tutorial](https://github.com/example/mastering-cagent) | Advanced tutorial on building multi-agent systems with cagent | aiexpert | 2026-02-01 |
+| [cagent-best-practices](https://github.com/example/cagent-practices) | Best practices and patterns for production cagent deployments | devteam | 2026-01-28 |
+
 ### MCP Servers
 
 | Name | Description | Stars |
@@ -36,7 +44,8 @@ This is an example of what the scanner output looks like when it finds new cagen
 2. **Verify the tools** actually use cagent (check their README/code)
 3. **Check for duplicates** against the current awesome list
 4. **Categorize appropriately**:
-   - MCP Servers → `## 🔧 MCP Servers for cagent` section
+   - Blogs & Articles → Appropriate section under `## 🔌 cagent + MCP`, `## 💻 cagent + IDE`, etc.
+   - MCP Servers → `## 🔌 cagent + MCP` section
    - Sample Projects → `## 💻 GitHub Sample Projects` section
    - Other repos → Choose the most appropriate section based on content
 

@@ -2,7 +2,7 @@
 """
 GitHub Scanner for Docker cagent Tools
 ========================================
-Scans GitHub to find new tools, projects, and repositories that use Docker cagent.
+Scans GitHub to find new tools, projects, repositories, and blog posts that use Docker cagent.
 Outputs results in a format ready to be added to the awesome-docker-cagent README.
 
 Usage:
@@ -44,7 +44,8 @@ class CagentToolScanner:
             'repositories': [],
             'mcp_servers': [],
             'sample_projects': [],
-            'tutorials': []
+            'tutorials': [],
+            'blogs': []
         }
     
     def load_existing_urls(self, readme_path: str = 'README.md'):
@@ -258,6 +259,99 @@ class CagentToolScanner:
         except Exception as e:
             print(f"Unexpected error: {type(e).__name__}")
     
+    def search_blogs(self, query: str, days_back: int = 90):
+        """Search GitHub for blog posts and articles about cagent"""
+        print(f"\nSearching for blog posts: {query}")
+        
+        # Calculate date for recent activity filter
+        since_date = datetime.now() - timedelta(days=days_back)
+        date_str = since_date.strftime('%Y-%m-%d')
+        
+        # Search for repositories that are likely blogs
+        blog_indicators = [
+            'blog',
+            'article',
+            'tutorial',
+            'guide',
+            'post'
+        ]
+        
+        # Add blog-specific terms to query
+        full_query = f"{query} pushed:>{date_str}"
+        
+        try:
+            repos = self.github.search_repositories(
+                query=full_query,
+                sort='updated',
+                order='desc'
+            )
+            
+            found_count = 0
+            for repo in repos[:30]:  # Limit to top 30 results
+                if self.is_duplicate(repo.html_url):
+                    continue
+                
+                # Skip archived repos
+                if repo.archived:
+                    continue
+                
+                # Check if this looks like a blog/article repository
+                if self.is_blog_repository(repo):
+                    readme = self.get_readme_content(repo)
+                    
+                    self.results['blogs'].append({
+                        'name': repo.name,
+                        'url': repo.html_url,
+                        'description': repo.description or 'Blog/article about cagent',
+                        'stars': repo.stargazers_count,
+                        'author': repo.owner.login,
+                        'updated': repo.updated_at.strftime('%Y-%m-%d')
+                    })
+                    found_count += 1
+                
+                # Rate limiting
+                if found_count >= 15:
+                    break
+            
+            print(f"Found {found_count} blog/article repositories")
+            
+        except GithubException as e:
+            print(f"Error searching blogs: HTTP {e.status}")
+            if e.status == 403:
+                print("  → Rate limit exceeded. Try again later or set GITHUB_TOKEN.")
+        except Exception as e:
+            print(f"Unexpected error: {type(e).__name__}")
+    
+    def is_blog_repository(self, repo) -> bool:
+        """Check if repository appears to be a blog or article"""
+        blog_indicators = [
+            'blog',
+            'article',
+            'tutorial',
+            'guide',
+            'post',
+            'writing',
+            'content'
+        ]
+        
+        name = repo.name.lower()
+        description = (repo.description or "").lower()
+        
+        # Check if name or description contains blog indicators
+        for indicator in blog_indicators:
+            if indicator in name or indicator in description:
+                return True
+        
+        # Check for common blog/documentation sites
+        topics = [topic.lower() for topic in repo.get_topics()]
+        blog_topics = ['blog', 'article', 'tutorial', 'documentation', 'guide']
+        
+        for topic in blog_topics:
+            if topic in topics:
+                return True
+        
+        return False
+    
     def run_scan(self):
         """Execute the full scan"""
         print("=" * 70)
@@ -267,7 +361,7 @@ class CagentToolScanner:
         # Load existing URLs for deduplication
         self.load_existing_urls()
         
-        # Search queries
+        # Search queries for repositories
         queries = [
             'cagent docker',
             'docker cagent',
@@ -284,6 +378,18 @@ class CagentToolScanner:
         # Search for specific configuration files
         self.search_code_files('cagent.yaml')
         
+        # Search for blog posts and articles
+        blog_queries = [
+            'cagent docker blog',
+            'cagent tutorial',
+            'cagent guide',
+            'docker cagent article',
+            'cagent introduction',
+        ]
+        
+        for query in blog_queries:
+            self.search_blogs(query, days_back=90)
+        
         print("\n" + "=" * 70)
         print("Scan Complete!")
         print("=" * 70)
@@ -294,6 +400,14 @@ class CagentToolScanner:
         
         output.append("\n## 🔍 New Tools Found on GitHub\n")
         output.append(f"*Scan Date: {datetime.now().strftime('%Y-%m-%d')}*\n")
+        
+        # Blogs & Articles (NEW!)
+        if self.results['blogs']:
+            output.append("\n### Blogs & Articles\n")
+            output.append("| Title | Description | Author | Updated |")
+            output.append("|-------|-------------|--------|---------|")
+            for item in sorted(self.results['blogs'], key=lambda x: x['updated'], reverse=True):
+                output.append(f"| [{item['name']}]({item['url']}) | {item['description']} | {item['author']} | {item['updated']} |")
         
         # MCP Servers
         if self.results['mcp_servers']:
@@ -336,9 +450,11 @@ class CagentToolScanner:
         """Print summary of findings"""
         total = (len(self.results['mcp_servers']) + 
                 len(self.results['sample_projects']) + 
-                len(self.results['repositories']))
+                len(self.results['repositories']) +
+                len(self.results['blogs']))
         
         print(f"\n📊 Summary:")
+        print(f"  - Blogs & Articles: {len(self.results['blogs'])}")
         print(f"  - MCP Servers: {len(self.results['mcp_servers'])}")
         print(f"  - Sample Projects: {len(self.results['sample_projects'])}")
         print(f"  - Other Repositories: {len(self.results['repositories'])}")
