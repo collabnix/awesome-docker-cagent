@@ -68,15 +68,20 @@ if [ -f "new_tools_found.md" ]; then
     
     # Check if blogs were found
     if grep -q "### Blogs & Articles" new_tools_found.md; then
-        # Count blog entries more robustly
-        blog_count=$(grep -A 999 "### Blogs & Articles" new_tools_found.md | grep -m1 "^### " -B 999 | grep "^|" | tail -n +3 | wc -l || echo "0")
+        # Extract just the Blogs & Articles section using sed
+        # Stop at next section header or end of file
+        blog_section=$(sed -n '/### Blogs & Articles/,/^### /p' new_tools_found.md | head -n -1)
+        
+        # Count blog entries (exclude header and separator rows)
+        blog_count=$(echo "$blog_section" | grep "^|" | tail -n +3 | wc -l)
+        
         if [ "$blog_count" -gt 0 ]; then
             echo -e "${GREEN}Found $blog_count new blog(s)/article(s)!${NC}"
             echo ""
             echo -e "${BLUE}Preview of blogs found:${NC}"
             echo ""
-            # Display all blog entries (stop at next section or EOF)
-            grep -A 999 "### Blogs & Articles" new_tools_found.md | grep -m1 "^### " -B 999 | head -n -1 || grep -A 999 "### Blogs & Articles" new_tools_found.md
+            # Display the blog section
+            echo "$blog_section"
             echo ""
         else
             echo -e "${YELLOW}No new blogs found (all may already be in the awesome list)${NC}"
