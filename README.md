@@ -414,13 +414,17 @@ export GITHUB_TOKEN=your_github_personal_access_token
 
 # Run the scanner
 python3 scan_github_tools.py
+
+# Or use the convenience script for blog-focused scanning
+./scan_blogs.sh
 ```
 
 The scanner will:
 
 - Search GitHub for new cagent tools and projects
+- **Search for blog posts and articles about cagent**
 - Filter by quality (stars, recent activity, meaningful content)
-- Automatically categorize findings (MCP servers, sample projects, etc.)
+- Automatically categorize findings (blogs, MCP servers, sample projects, etc.)
 - Deduplicate against existing entries
 - Generate formatted markdown ready to add to this README
 

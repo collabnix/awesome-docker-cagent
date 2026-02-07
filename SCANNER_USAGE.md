@@ -49,6 +49,20 @@ You can run the scanner without a token, but you'll be limited to 60 API request
 python3 scan_github_tools.py
 ```
 
+### Using the Blog Scanner Convenience Script
+
+For a more user-friendly experience focused on finding blogs:
+
+```bash
+./scan_blogs.sh
+```
+
+This script:
+- Automatically checks for dependencies
+- Provides colored output for better readability
+- Highlights blog findings in the results
+- Gives helpful prompts if GITHUB_TOKEN is not set
+
 ## How It Works
 
 ### 1. Search Queries
