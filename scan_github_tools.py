@@ -290,6 +290,10 @@ class CagentToolScanner:
             )
             
             found_count = 0
+            # Note: Slicing repos[:N] still fetches all results from API first
+            # This is acceptable for our use case since we need to filter/check each repo
+            # before deciding if it's a blog. API-level limiting via per_page would skip
+            # potentially valid blogs that come later in results.
             for repo in repos[:self.MAX_REPOS_PER_QUERY]:  # Limit results
                 if self.is_duplicate(repo.html_url):
                     continue

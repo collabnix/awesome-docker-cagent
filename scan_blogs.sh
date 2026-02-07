@@ -70,12 +70,14 @@ if [ -f "new_tools_found.md" ]; then
     if grep -q "### Blogs & Articles" new_tools_found.md; then
         # Extract just the Blogs & Articles section using sed
         # Pattern explanation: 
-        # - '/### Blogs & Articles/,/^### /' = From "### Blogs & Articles" to next "### " header
+        # - '/### Blogs & Articles/,/^### /' = From "### Blogs & Articles" to next "### " header (or EOF if last section)
         # - '{/^### Blogs & Articles/p; /^### /!p;}' = Print the start header and everything except the end header
         # - 'sed '/^### $/d'' = Remove any standalone "### " lines
+        # This correctly handles blogs as both middle section and last section (tested)
         blog_section=$(sed -n '/### Blogs & Articles/,/^### /{/^### Blogs & Articles/p; /^### /!p;}' new_tools_found.md | sed '/^### $/d')
         
         # Count blog entries (exclude header and separator rows)
+        # Assumes standard markdown table format: header row, separator row (---), then data rows
         blog_count=$(echo "$blog_section" | grep "^|" | tail -n +3 | wc -l)
         
         if [ "$blog_count" -gt 0 ]; then
