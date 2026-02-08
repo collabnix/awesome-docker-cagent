@@ -6,6 +6,14 @@ This is an example of what the scanner output looks like when it finds new cagen
 
 *Scan Date: 2026-02-05*
 
+### Blogs & Articles
+
+| Title | Description | Author | Updated |
+|-------|-------------|--------|---------|
+| [cagent-getting-started](https://github.com/example/cagent-intro) | Comprehensive introduction to Docker cagent for beginners | johndoe | 2026-02-03 |
+| [mastering-cagent-tutorial](https://github.com/example/mastering-cagent) | Advanced tutorial on building multi-agent systems with cagent | aiexpert | 2026-02-01 |
+| [cagent-best-practices](https://github.com/example/cagent-practices) | Best practices and patterns for production cagent deployments | devteam | 2026-01-28 |
+
 ### MCP Servers
 
 | Name | Description | Stars |
@@ -33,12 +41,17 @@ This is an example of what the scanner output looks like when it finds new cagen
 ## How to Use This Output
 
 1. **Review each entry** for quality and relevance
-2. **Verify the tools** actually use cagent (check their README/code)
+2. **Verify the content** actually relates to cagent (check their README/code)
 3. **Check for duplicates** against the current awesome list
 4. **Categorize appropriately**:
-   - MCP Servers → `## 🔧 MCP Servers for cagent` section
-   - Sample Projects → `## 💻 GitHub Sample Projects` section
-   - Other repos → Choose the most appropriate section based on content
+   - **Blogs & Articles**: Review and add to the appropriate topical section in README.md:
+     - MCP-related blogs → `## 🔌 cagent + MCP` → Blogs & Articles subsection
+     - DMR-related blogs → `## 🖥️ cagent + Docker Model Runner` → Blogs & Articles subsection
+     - IDE/ACP blogs → `## 💻 cagent + IDE (ACP)` → Blogs & Articles subsection
+     - General blogs → `## 📖 General Resources` → Getting Started or Advanced Topics subsections
+   - **MCP Servers** → `## 🔌 cagent + MCP` → Projects subsection
+   - **Sample Projects** → `## 💻 GitHub Sample Projects` section
+   - **Other repositories** → Choose the most appropriate section based on content
 
 5. **Copy the markdown** and paste into README.md in the appropriate section
 6. **Maintain formatting** consistency with existing entries

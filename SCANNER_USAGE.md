@@ -5,8 +5,9 @@ This scanner automatically searches GitHub to find new tools, projects, and repo
 ## Features
 
 - 🔍 **Smart Search**: Searches GitHub using multiple query strategies
+- 📝 **Blog Discovery**: Searches for blog posts and articles about cagent
 - 🔄 **Deduplication**: Automatically skips tools already in the awesome list
-- 🏷️ **Auto-Categorization**: Categorizes findings into MCP Servers, Sample Projects, or General Repositories
+- 🏷️ **Auto-Categorization**: Categorizes findings into Blogs, MCP Servers, Sample Projects, or General Repositories
 - ⭐ **Quality Filtering**: Filters by star count, recent activity, and meaningful content
 - 📝 **Formatted Output**: Generates markdown ready to paste into README.md
 - 🚫 **Excludes Archived**: Skips archived or inactive repositories
@@ -48,18 +49,40 @@ You can run the scanner without a token, but you'll be limited to 60 API request
 python3 scan_github_tools.py
 ```
 
+### Using the Blog Scanner Convenience Script
+
+For a more user-friendly experience focused on finding blogs:
+
+```bash
+./scan_blogs.sh
+```
+
+This script:
+- Automatically checks for dependencies
+- Provides colored output for better readability
+- Highlights blog findings in the results
+- Gives helpful prompts if GITHUB_TOKEN is not set
+
 ## How It Works
 
 ### 1. Search Queries
 
 The scanner uses multiple search strategies:
 
+**Repository Searches:**
 - `cagent docker` - General cagent + Docker projects
 - `docker cagent` - Projects mentioning Docker cagent
 - `cagent yaml` - Projects with cagent YAML configurations
 - `cagent multi-agent` - Multi-agent systems using cagent
 - `docker model runner cagent` - Projects using Docker Model Runner
 - `cagent MCP` - MCP integration projects
+
+**Blog & Article Searches:**
+- `cagent docker blog` - Blog posts about cagent
+- `cagent tutorial` - Tutorial articles
+- `cagent guide` - How-to guides
+- `docker cagent article` - Articles about Docker cagent
+- `cagent introduction` - Introduction/getting started posts
 
 ### 2. File Search
 
@@ -79,6 +102,10 @@ The scanner filters repositories based on:
 ### 4. Auto-Categorization
 
 Repositories are automatically categorized:
+
+**Blogs & Articles** - Identified by:
+- Name or description contains: `blog`, `article`, `tutorial`, `guide`, `post`, `writing`, `content`
+- Topics include: `blog`, `article`, `tutorial`, `documentation`, `guide`
 
 **MCP Servers** - Identified by:
 - Name contains: `mcp-server`, `mcp_server`
@@ -103,6 +130,11 @@ Formatted tables ready to paste into README.md:
 ```markdown
 ## 🔍 New Tools Found on GitHub
 *Scan Date: 2026-02-05*
+
+### Blogs & Articles
+| Title | Description | Author | Updated |
+|-------|-------------|--------|---------|
+| [cagent-intro](https://github.com/...) | Introduction to Docker cagent | johndoe | 2026-02-01 |
 
 ### MCP Servers
 | Name | Description | Stars |
