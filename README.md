@@ -373,6 +373,11 @@ rag:
 |[cagent-ai-agent-docker](https://github.com/0GiS0/cagent-ai-agent-docker)                   |Minimal example of running cagent with GitHub Models                                                                        |0GiS0           |
 |[cagent-product-catalog](https://github.com/ajeetraina/cagent-product-catalog)              |Multi-agent catalog service implementation with specialized agents for vendor intake, market research, and customer matching|Ajeet Raina     |
 |[docker-cagent-playground](https://github.com/tubone24/docker-cagent-playground)            |Web-based chat UI for interacting with cagent agents                                                                        |tubone24        |
+|[Extractor-desktop-app](https://github.com/alchimie-di-circe/Extractor-desktop-app)         |Electron+Svelte+Cagent brand asset management app                                                                           |alchimie-di-circe|
+|[Cagent](https://github.com/kashyaprpuranik/Cagent)                                         |Secure devbox to run AI workload with network allowlists and API proxies                                                    |kashyaprpuranik |
+|[labspace-cagent](https://github.com/ajeetraina/labspace-cagent)                            |Labspace for Docker cagent workshops and learning                                                                           |Ajeet Raina     |
+|[vscode-acp-provider](https://github.com/gayanper/vscode-acp-provider)                      |VS Code ACP client extension for cagent integration                                                                         |gayanper        |
+|[go-mehrhof](https://github.com/valksor/go-mehrhof)                                         |Structured creation environment with cagent workflow integration                                                            |valksor         |
 
 -----
 
