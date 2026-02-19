@@ -378,6 +378,12 @@ rag:
 |[go-mehrhof](https://github.com/valksor/go-mehrhof)                                         |Structured creation environment with cagent workflow integration                                                            |valksor         |
 |[labspace-cagent](https://github.com/ajeetraina/labspace-cagent)                            |Labspace for Docker cagent workshops and learning                                                                           |Ajeet Raina     |
 |[vscode-acp-provider](https://github.com/gayanper/vscode-acp-provider)                      |VS Code ACP client extension for cagent integration                                                                         |gayanper        |
+|[klawdOS](https://github.com/ericcurtin/klawdOS)                                            |AI-native KDE-based OS with Docker Model Runner and cagent integration                                                      |ericcurtin      |
+|[cagent-rag-demo](https://github.com/ajeetraina/cagent-rag-demo)                            |RAG (Retrieval-Augmented Generation) demo with cagent configurations                                                        |Ajeet Raina     |
+|[docker-cagent-antakshari](https://github.com/ajeetraina/docker-cagent-antakshari)          |Social music network powered by AI agents - SoundCloud meets Antakshari with cagent                                         |Ajeet Raina     |
+|[cagent-workshop](https://github.com/rumpl/cagent-workshop)                                 |Step-by-step workshop materials for learning cagent                                                                         |rumpl           |
+|[labspace-cagent](https://github.com/dockersamples/labspace-cagent)                         |Official Docker samples labspace for hands-on cagent learning                                                               |dockersamples   |
+|[cagent](https://github.com/noperator/cagent)                                               |Secure agent environment - locks down network and filesystem for safe exploration                                           |noperator       |
 
 -----
 
