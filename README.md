@@ -382,8 +382,8 @@ rag:
 |[cagent-rag-demo](https://github.com/ajeetraina/cagent-rag-demo)                            |RAG (Retrieval-Augmented Generation) demo with cagent configurations                                                        |Ajeet Raina     |
 |[docker-cagent-antakshari](https://github.com/ajeetraina/docker-cagent-antakshari)          |Social music network powered by AI agents - SoundCloud meets Antakshari with cagent                                         |Ajeet Raina     |
 |[cagent-workshop](https://github.com/rumpl/cagent-workshop)                                 |Step-by-step workshop materials for learning cagent                                                                         |rumpl           |
-|[labspace-cagent](https://github.com/dockersamples/labspace-cagent)                         |Official Docker samples labspace for hands-on cagent learning                                                               |dockersamples   |
-|[cagent](https://github.com/noperator/cagent)                                               |Secure agent environment - locks down network and filesystem for safe exploration                                           |noperator       |
+|[dockersamples-labspace-cagent](https://github.com/dockersamples/labspace-cagent)           |Official Docker samples labspace for hands-on cagent learning                                                               |dockersamples   |
+|[cagent-secure-sandbox](https://github.com/noperator/cagent)                                |Secure agent sandbox - locks down network and filesystem for safe AI exploration                                            |noperator       |
 
 -----
 
